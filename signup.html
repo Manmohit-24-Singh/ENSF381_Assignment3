@@ -1,34 +1,7 @@
 <!DOCTYPE html>
-<html>
 <head>
     <title>Sign Up - LMS</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <style>
-        button.signup {
-            background-color: #4CAF50;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px;
-            opacity: 0.5;
-            transition: opacity 0.3s, background-color 0.3s;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button.signup{
-            background-color: #45A049;
-            opacity: 1.0;
-        }
-
-        .message-box {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -81,11 +54,11 @@
 
             const username_regex = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
             if (!username_regex.test(username)) {
-                errors.push(`Invalid username (Reason: Must be 3-20 characters long, start with a letter, and contain only letters, numbers, hyphens, or underscores.)`);
+                    errors.push(`Invalid username (Reason: Must be 3-20 characters long, start with a letter, and contain only letters, numbers, hyphens, or underscores.)`);
             }
 
             const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+[\]{}|;:'",.<>?/`~]).{8,}$/;
-            if (!passwordRegex.test(password)) {
+            if (!password_regex.test(password)) {
                 errors.push(`Invalid password (Reason: Must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character.)`);
             }
 
@@ -94,7 +67,7 @@
             }
 
             const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
+            if (!email_regex.test(email)) {
                 errors.push(`Invalid email (Reason: Please enter a valid email address.)`);
             }
 

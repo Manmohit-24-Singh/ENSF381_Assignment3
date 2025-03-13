@@ -25,6 +25,8 @@
             <p>Topic: HTML Basics</p>
             <p>Deadline: 11:59 PM, February 10, 2025</p>
             <p>Attempts Allowed: 1</p>
+            <h3>Time Remaining: <span id="quizTimer">10:00</span></h3>
+
         </div>
         
         <h3>Question 1</h3>
@@ -57,6 +59,63 @@
     <footer>
         <p>&copy; 2025 LMS. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let timeLeft = 10 * 60; 
+            const timerDisplay = document.getElementById("quizTimer");
+            
+            function updateTimer() {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time is up! Submitting your quiz...");
+                    window.location.href = "leaderboard.html";
+                }
+                timeLeft--;
+            }
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer();
+        
+            document.querySelector(".FinQz").addEventListener("click", function (event) {
+                event.preventDefault();
+        
+                let score = 0;
+                let q1Answered = false;
+                let q2Answered = false;
+        
+                const q1Options = document.getElementsByName("q1");
+                q1Options.forEach(option => {
+                    if (option.checked) {
+                        q1Answered = true;
+                        if (option.value === "Hyper Text Markup Language") {
+                            score += 50;
+                        }
+                    }
+                });
+        
+                const q2a = document.getElementById("q2a");
+                const q2b = document.getElementById("q2b");
+        
+                if (q2a.checked || q2b.checked) {
+                    q2Answered = true;
+                    if (q2a.checked) score += 25;
+                    if (q2b.checked) score += 25;
+                }
+        
+                if (!q1Answered || !q2Answered) {
+                    alert("Please answer all questions before submitting.");
+                    return;
+                }
+        
+                alert(`Quiz Completed! Your final score is: ${score}/100`);
+                window.location.href = "leaderboard.html";
+            });
+        });
+        </script>
+        
 </body>
 </html>
         

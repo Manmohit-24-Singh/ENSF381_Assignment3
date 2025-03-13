@@ -27,8 +27,6 @@
         </select>
         
         <section class="Enrolled">
-			<!-- Courses in which the student is enrolled -->
-            <!-- Display Course 1, 2, and 3 in the same line -->
             <h2>Enrolled Courses</h2>
             <hr>
             <table class="cv">
@@ -58,7 +56,6 @@
                         </div>
 					</td>
 				</tr>
-				<!-- Display Course 4 and 5 in the same line -->
 				<tr>
 					<td>
 						<div>
@@ -85,8 +82,6 @@
         <br>
         <br>
         <section class="Pending">
-			<!-- Courses in which the student is enrolled -->
-            <!-- Display Course 1, 2, and 3 in the same line -->
             <h2>Pending Invitations</h2>
             <hr>
             <table class="cv">
@@ -116,5 +111,62 @@
     <footer>
         <p>&copy; 2025 LMS. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.Pending .accept').forEach(button => {
+                button.addEventListener('click', function() {
+                    const td = this.closest('td');
+                    const courseDiv = td.querySelector('div').cloneNode(true);
+                    
+                    const img = courseDiv.querySelector('img');
+                    img.src = 'course1.jpg';
+                    img.alt = 'Course 1';  
+                    
+                    courseDiv.querySelector('.accept').remove();
+                    courseDiv.querySelector('.decline').remove();
+                    
+                    const quizLink = document.createElement('a');
+                    quizLink.href = 'attempt_quiz.html';
+                    quizLink.textContent = 'Attempt Quiz';
+                    courseDiv.appendChild(quizLink);
+                    
+                    const newTd = document.createElement('td');
+                    newTd.appendChild(courseDiv);
+                    
+                    const enrolledTable = document.querySelector('.Enrolled .cv');
+                    const rows = enrolledTable.querySelectorAll('tr');
+                    const lastRow = rows[rows.length - 1];
+                    
+                    if (lastRow.querySelectorAll('td').length < 3) {
+                        lastRow.appendChild(newTd);
+                    } else {
+                        const newRow = document.createElement('tr');
+                        newRow.appendChild(newTd);
+                        enrolledTable.appendChild(newRow);
+                    }
+                    
+                    td.remove(); 
+                });
+            });
+        
+            document.querySelectorAll('.Pending .decline').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('td').remove();
+                });
+            });
+        
+            document.querySelectorAll('.cv').forEach(table => {
+                table.addEventListener('mouseover', e => {
+                    const tile = e.target.closest('td div');
+                    if (tile) tile.style.backgroundColor = '#ffffff';
+                });
+                table.addEventListener('mouseout', e => {
+                    const tile = e.target.closest('td div');
+                    if (tile) tile.style.backgroundColor = '';
+                });
+            });
+        });
+        </script>
+        
 </body>
 </html>

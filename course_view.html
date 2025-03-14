@@ -155,14 +155,14 @@
                 });
             });
         
-            document.querySelectorAll('.cv').forEach(table => {
-                table.addEventListener('mouseover', e => {
-                    const tile = e.target.closest('td div');
-                    if (tile) tile.style.backgroundColor = '#ffffff';
+            document.querySelectorAll('.cv td').forEach(td => {
+                td.addEventListener('mouseover', function() {
+                    this.style.backgroundColor = '#ffffff'; 
+                    this.style.cursor = 'pointer';
                 });
-                table.addEventListener('mouseout', e => {
-                    const tile = e.target.closest('td div');
-                    if (tile) tile.style.backgroundColor = '';
+
+                td.addEventListener('mouseout', function() {
+                    this.style.backgroundColor = ''; 
                 });
             });
         });
